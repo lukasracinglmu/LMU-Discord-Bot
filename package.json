@@ -2,6 +2,7 @@
   "name": "lmu-discord-presence-bot",
   "version": "3.0.0",
   "private": true,
+  "type": "module",
   "description": "LMU Discord presence bot for Wispbyte",
   "main": "index.js",
   "scripts": {
