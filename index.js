@@ -37,7 +37,7 @@ function applyPresence() {
 async function sendReinstallReminder() {
   try {
     const user = await client.users.fetch(REMINDER_USER_ID);
-    await user.send('Erinnerung: Du musst den Discord-Bot neu aufsetzen, damit er nicht offline geht.');
+    await user.send(`<@${REMINDER_USER_ID}> Erinnerung: Du musst den Discord-Bot neu aufsetzen, damit er nicht offline geht.`);
     console.log(`28-day reminder sent to ${REMINDER_USER_ID}`);
   } catch (error) {
     console.error('Failed to send 28-day reminder:', error?.message || error);
