@@ -8,7 +8,10 @@ if (!token) {
   process.exit(1);
 }
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [GatewayIntentBits.Guilds]
+});
+
 const startedAt = Date.now();
 
 function applyPresence() {
@@ -20,7 +23,9 @@ function applyPresence() {
       {
         name: 'Le Mans Ultimate',
         type: ActivityType.Playing,
-        timestamps: { start: startedAt }
+        timestamps: {
+          start: startedAt
+        }
       }
     ],
     afk: false
@@ -29,6 +34,7 @@ function applyPresence() {
 
 client.once('ready', () => {
   applyPresence();
+
   console.log(`Logged in as ${client.user.tag}`);
   console.log('Status: DND');
   console.log('Activity: Playing Le Mans Ultimate');
@@ -44,6 +50,10 @@ process.on('unhandledRejection', error => {
 });
 
 client.login(token).catch(error => {
-  console.error('Discord login failed:', error?.message || error);
+  console.error(
+    'Discord login failed:',
+    error?.message || error
+  );
+
   process.exit(1);
 });
