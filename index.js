@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { ActivityType, Client, GatewayIntentBits } from 'discord.js';
 
 const token = process.env.DISCORD_BOT_TOKEN?.trim();
+const TEST_DM_USER_ID = '1033453785416208564';
 
 if (!token) {
   console.error('ERROR: DISCORD_BOT_TOKEN is missing.');
@@ -32,13 +33,21 @@ function applyPresence() {
   });
 }
 
-client.once('ready', () => {
+client.once('ready', async () => {
   applyPresence();
 
   console.log(`Logged in as ${client.user.tag}`);
   console.log('Status: DND');
   console.log('Activity: Playing Le Mans Ultimate');
   console.log('Elapsed timer: enabled');
+
+  try {
+    const user = await client.users.fetch(TEST_DM_USER_ID);
+    await user.send('Test erfolgreich: Der Discord-Bot kann dir Direktnachrichten senden.');
+    console.log(`One-time test DM sent to ${TEST_DM_USER_ID}`);
+  } catch (error) {
+    console.error('Failed to send one-time test DM:', error?.message || error);
+  }
 });
 
 client.on('error', error => {
